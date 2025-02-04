@@ -1,0 +1,11 @@
+{
+    "Admin": true,
+    "Product": true,
+    "Attribute": true,
+    "Category": true,
+    "Inventory": true,
+    "Channel": true,
+    "Cart": true,
+    "Order": true,
+    "Core": true
+}
