@@ -7,5 +7,6 @@
     "Channel": true,
     "Cart": true,
     "Order": true,
-    "Core": true
+    "Core": true,
+    "Locale": true
 }
