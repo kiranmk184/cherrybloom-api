@@ -14,6 +14,6 @@ use Modules\Locale\Http\Controllers\LocaleController;
 |
 */
 
-Route::group([], function () {
-    Route::resource('locale', LocaleController::class)->names('locale');
-});
+// Route::group([], function () {
+//     Route::resource('locale', LocaleController::class)->names('locale');
+// });
