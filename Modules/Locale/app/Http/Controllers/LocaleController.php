@@ -4,12 +4,12 @@ namespace Modules\Locale\Http\Controllers;
 
 use Exception;
 use Illuminate\Http\JsonResponse;
-use Modules\Core\Http\Controllers\CoreController;
+use Modules\Core\Http\Controllers\BaseController;
 use Modules\Locale\Http\Requests\LocaleStoreRequest;
 use Modules\Locale\Http\Requests\LocaleUpdateRequest;
 use Modules\Locale\Services\LocaleService;
 
-class LocaleController extends CoreController
+class LocaleController extends BaseController
 {
     public function __construct(protected LocaleService $localeService)
     {

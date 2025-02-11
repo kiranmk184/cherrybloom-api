@@ -3,7 +3,7 @@
 namespace Modules\Locale\Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
+use Modules\Locale\Models\Locale;
 use Modules\Locale\Enum\DirectionEnum;
 
 class LocaleSeeder extends Seeder
@@ -15,10 +15,10 @@ class LocaleSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('locales')->insert([
+        Locale::create([
             'name' => 'English',
             'code' => 'en',
-            'direction' => 'ltr',
+            'direction' => DirectionEnum::LTR->value,
             'locale_img' => null
         ]);
     }
