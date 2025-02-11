@@ -5,7 +5,7 @@ namespace Modules\Core\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Modules\Core\Traits\ResponseMessage;
 
-class CoreController extends Controller
+class BaseController extends Controller
 {
     use ResponseMessage;
 }

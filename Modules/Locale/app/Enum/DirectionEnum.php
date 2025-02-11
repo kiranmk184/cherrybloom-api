@@ -2,7 +2,9 @@
 
 namespace Modules\Locale\Enum;
 
-enum DirectionEnum: string
+use Modules\Core\Enum\EnumInterface;
+
+enum DirectionEnum: string implements EnumInterface
 {
     case LTR = 'ltr';
     case RTL = 'rtl';

@@ -2,7 +2,7 @@
 
 namespace Modules\Core\Services;
 
-class CoreService
+class BaseService
 {
 
 }

@@ -3,6 +3,8 @@
 namespace Modules\Locale\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
+use Modules\Locale\Enum\DirectionEnum;
 
 class LocaleStoreRequest extends FormRequest
 {
@@ -12,7 +14,10 @@ class LocaleStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name' => ['required', 'string', 'unique:locales,name',],
+            'namcodee' => ['required', 'string', 'unique:locales,code',],
+            'direction' => [Rule::enum(DirectionEnum::class)],
+            'locale_img' => ['required', 'string',],
         ];
     }
 
