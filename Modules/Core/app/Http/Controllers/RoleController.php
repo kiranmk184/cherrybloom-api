@@ -1,17 +1,17 @@
 <?php
 
-namespace Modules\Category\Http\Controllers;
+namespace Modules\Core\Http\Controllers;
 
 use Exception;
 use Illuminate\Http\JsonResponse;
-use Modules\Category\Http\Requests\CategoryStoreRequest;
-use Modules\Category\Http\Requests\CategoryUpdateRequest;
-use Modules\Category\Services\CategoryService;
 use Modules\Core\Http\Controllers\BaseController;
+use Modules\Core\Http\Requests\RoleStoreRequest as RequestsRoleStoreRequest;
+use Modules\Core\Http\Requests\RoleUpdateRequest as RequestsRoleUpdateRequest;
+use Modules\Core\Services\RoleService;
 
-class CategoryController extends BaseController
+class RoleController extends BaseController
 {
-    public function __construct(protected CategoryService $categoryService)
+    public function __construct(protected RoleService $roleService)
     {
     }
 
@@ -21,18 +21,18 @@ class CategoryController extends BaseController
     public function index(): JsonResponse
     {
         try {
-            $categories = $this->categoryService->index();
+            $roles = $this->roleService->index();
         } catch (Exception $exception) {
             return $this->errorResponse(
                 message: $exception->getMessage(),
-                code: $exception->getCode(),
+                code: $exception->getCode()
             );
         }
 
         return $this->successResponse(
-            message: 'Categories fetched successfully.',
+            message: 'Roles fetched successfully.',
             payload: [
-                'categories' => $categories,
+                'roles' => $roles,
             ]
         );
     }
@@ -40,10 +40,10 @@ class CategoryController extends BaseController
     /**
      * Store a newly created resource in storage.
      */
-    public function store(CategoryStoreRequest $request): JsonResponse
+    public function store(RequestsRoleStoreRequest $request): JsonResponse
     {
         try {
-            $category = $this->categoryService->store($request->all());
+            $role = $this->roleService->store($request->all());
         } catch (Exception $exception) {
             return $this->errorResponse(
                 message: $exception->getMessage(),
@@ -52,9 +52,9 @@ class CategoryController extends BaseController
         }
 
         return $this->successResponse(
-            message: 'Category created successfully.',
+            message: 'Role stored successfully.',
             payload: [
-                'category' => $category
+                'role' => $role,
             ]
         );
     }
@@ -65,7 +65,7 @@ class CategoryController extends BaseController
     public function show(string|int $id): JsonResponse
     {
         try {
-            $category = $this->categoryService->show($id);
+            $role = $this->roleService->show($id);
         } catch (Exception $exception) {
             return $this->errorResponse(
                 message: $exception->getMessage(),
@@ -74,20 +74,20 @@ class CategoryController extends BaseController
         }
 
         return $this->successResponse(
-            message: 'Category fetched successfully.',
+            message: 'Role fetched successfully.',
             payload: [
-                'category' => $category
-            ],
+                'role' => $role,
+            ]
         );
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(CategoryUpdateRequest $request, string|int $id): JsonResponse
+    public function update(RequestsRoleUpdateRequest $request, $id): JsonResponse
     {
         try {
-            $this->categoryService->update($id, $request->all());
+            $this->roleService->update($id, $request->all());
         } catch (Exception $exception) {
             return $this->errorResponse(
                 message: $exception->getMessage(),
@@ -96,7 +96,7 @@ class CategoryController extends BaseController
         }
 
         return $this->successResponse(
-            message: 'Category updated successfully.',
+            message: 'Role updated successfully.',
         );
     }
 
@@ -106,7 +106,7 @@ class CategoryController extends BaseController
     public function destroy(string|int $id): JsonResponse
     {
         try {
-            $this->categoryService->delete($id);
+            $this->roleService->delete($id);
         } catch (Exception $exception) {
             return $this->errorResponse(
                 message: $exception->getMessage(),
@@ -115,7 +115,7 @@ class CategoryController extends BaseController
         }
 
         return $this->successResponse(
-            message: 'Category deleted successfully.'
+            message: 'Role deleted successfully.',
         );
     }
 }
