@@ -8,5 +8,6 @@
     "Cart": true,
     "Order": true,
     "Core": true,
-    "Locale": true
+    "Locale": true,
+    "Customer": true
 }
