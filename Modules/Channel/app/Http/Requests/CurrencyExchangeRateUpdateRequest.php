@@ -13,7 +13,6 @@ class CurrencyExchangeRateUpdateRequest extends FormRequest
     {
         return [
             'rate' => ['integer'],
-            'target_currency' => ['required', 'exists:currencies,id']
         ];
     }
 

@@ -42,6 +42,11 @@ class Currency extends Model
         'symbol',
     ];
 
+    public function baseChannels(): HasMany
+    {
+        return $this->hasMany(Channel::class);
+    }
+
     public function channels(): BelongsToMany
     {
         return $this->belongsToMany(Channel::class);

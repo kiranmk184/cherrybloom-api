@@ -3,39 +3,41 @@
 namespace Modules\Channel\Repositories;
 
 use Illuminate\Database\Eloquent\Collection;
+use Modules\Channel\Models\Currency;
 use Modules\Channel\Models\CurrencyExchangeRate;
+use Modules\Core\Repositories\BaseRepository;
 
-class CurrencyExchangeRateRepository
+class CurrencyExchangeRateRepository extends BaseRepository
 {
-    protected $model;
-
     public function __construct()
     {
         $this->model = new CurrencyExchangeRate();
     }
 
-    public function find(string|int $id): CurrencyExchangeRate
+    public function getExchangeRates(Currency $currency): Collection
     {
-        return $this->model->findOrFail($id);
+        return $currency->currencyExchangeRates()->get();
     }
 
-    public function all(): Collection
+    public function getExchangeRate(Currency $currency, string|int $id): CurrencyExchangeRate
     {
-        return $this->model->all();
+        return $currency->currencyExchangeRates()->findOrFail($id);
     }
 
-    public function store(array $data): CurrencyExchangeRate
+    public function storeExchangeRate(Currency $currency, array $data): CurrencyExchangeRate
     {
-        return $this->model->create($data);
+        return $currency->currencyExchangeRates()->create($data);
     }
 
-    public function update(string|int $id, array $data): bool
+    public function updateExchangeRate(Currency $currency, string|int $id, array $data): bool
     {
-        return $this->model->findOrFail($id)->update($data);
+        $currencyExchangeRate = $this->getExchangeRate($currency, $id);
+        return $currencyExchangeRate->update($data);
     }
 
-    public function delete(string|int $id): bool
+    public function deleteExchangeRate(Currency $currency, string|int $id): bool
     {
-        return $this->model->findOrFail($id)->delete();
+        $currencyExchangeRate = $this->getExchangeRate($currency, $id);
+        return $currencyExchangeRate->delete();
     }
 }
