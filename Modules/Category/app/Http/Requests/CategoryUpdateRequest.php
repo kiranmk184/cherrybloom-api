@@ -3,6 +3,7 @@
 namespace Modules\Category\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rules\File;
 
 class CategoryUpdateRequest extends FormRequest
 {
@@ -18,7 +19,7 @@ class CategoryUpdateRequest extends FormRequest
             'slug' => ['string', 'unique:categories,slug'],
             'display_mode' => ['string'],
             'description' => ['string'],
-            'category_icon' => ['string'],
+            'category_icon' => [File::types(['png', 'jpg'])->max(256)],
             'status' => ['boolean'],
             'additional' => ['json']
         ];

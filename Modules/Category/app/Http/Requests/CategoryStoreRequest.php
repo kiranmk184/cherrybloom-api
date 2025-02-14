@@ -3,6 +3,7 @@
 namespace Modules\Category\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rules\File;
 
 class CategoryStoreRequest extends FormRequest
 {
@@ -13,12 +14,12 @@ class CategoryStoreRequest extends FormRequest
     {
         return [
             'parent_id' => ['exists:categories,id'],
-            'position' => ['required','integer'],
+            'position' => ['required', 'integer'],
             'name' => ['string', 'unique:categories,name'],
             'slug' => ['string', 'unique:categories,slug'],
             'display_mode' => ['string'],
             'description' => ['string'],
-            'category_icon' => ['string'],
+            'category_icon' => ['required', File::types(['png', 'jpg'])->max(256)],
             'status' => ['boolean'],
             'additional' => ['json']
         ];
