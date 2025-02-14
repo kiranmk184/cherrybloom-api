@@ -9,9 +9,9 @@ use Illuminate\Http\Request;
 use Modules\Channel\Http\Requests\ChannelStoreRequest;
 use Modules\Channel\Http\Requests\ChannelUpdateRequest;
 use Modules\Channel\Services\ChannelService;
-use Modules\Core\Http\Controllers\CoreController;
+use Modules\Core\Http\Controllers\BaseController;
 
-class ChannelController extends CoreController
+class ChannelController extends BaseController
 {
     public function __construct(protected ChannelService $channelService)
     {

@@ -5,13 +5,12 @@ namespace Modules\Channel\Http\Controllers;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
-use App\Http\Controllers\Controller;
 use Modules\Channel\Http\Requests\CurrencyExchangeRateStoreRequest;
 use Modules\Channel\Http\Requests\CurrencyExchangeRateUpdateRequest;
-use Modules\Core\Http\Controllers\CoreController;
+use Modules\Core\Http\Controllers\BaseController;
 use Modules\Channel\Services\CurrencyExchangeRateService;
 
-class CurrencyExchangeRateController extends CoreController
+class CurrencyExchangeRateController extends BaseController
 {
     public function __construct(protected CurrencyExchangeRateService $currencyExchangeRateService)
     {
@@ -20,10 +19,10 @@ class CurrencyExchangeRateController extends CoreController
     /**
      * Display a listing of the resource.
      */
-    public function index(): JsonResponse
+    public function index(Request $request): JsonResponse
     {
         try {
-            $currencyExchangeRates = $this->currencyExchangeRateService->index();
+            $currencyExchangeRates = $this->currencyExchangeRateService->index($request->currencyId);
         } catch (Exception $exception) {
             return $this->errorResponse(
                 message: $exception->getMessage(),
@@ -45,7 +44,7 @@ class CurrencyExchangeRateController extends CoreController
     public function store(CurrencyExchangeRateStoreRequest $request): JsonResponse
     {
         try {
-            $currencyExchangeRate = $this->currencyExchangeRateService->store($request->all());
+            $currencyExchangeRate = $this->currencyExchangeRateService->store($request->currencyId, $request->all());
         } catch (Exception $exception) {
             return $this->errorResponse(
                 message: $exception->getMessage(),
@@ -64,10 +63,10 @@ class CurrencyExchangeRateController extends CoreController
     /**
      * Show the specified resource.
      */
-    public function show(string|int $id): JsonResponse
+    public function show(Request $request): JsonResponse
     {
         try {
-            $currencyExchangeRate = $this->currencyExchangeRateService->show($id);
+            $currencyExchangeRate = $this->currencyExchangeRateService->show($request->currencyId, $request->id);
         } catch (Exception $exception) {
             return $this->errorResponse(
                 message: $exception->getMessage(),
@@ -86,10 +85,10 @@ class CurrencyExchangeRateController extends CoreController
     /**
      * Update the specified resource in storage.
      */
-    public function update(CurrencyExchangeRateUpdateRequest $request, $id): JsonResponse
+    public function update(CurrencyExchangeRateUpdateRequest $request): JsonResponse
     {
         try {
-            $this->currencyExchangeRateService->update($id, $request->all());
+            $this->currencyExchangeRateService->update($request->currencyId, $request->id, $request->all());
         } catch (Exception $exception) {
             return $this->errorResponse(
                 message: $exception->getMessage(),
@@ -105,10 +104,10 @@ class CurrencyExchangeRateController extends CoreController
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string|int $id): JsonResponse
+    public function destroy(Request $request): JsonResponse
     {
         try {
-            $this->currencyExchangeRateService->delete($id);
+            $this->currencyExchangeRateService->delete($request->currencyId, $request->id);
         } catch (Exception $exception) {
             return $this->errorResponse(
                 message: $exception->getMessage(),

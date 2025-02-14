@@ -3,15 +3,13 @@
 namespace Modules\Channel\Http\Controllers;
 
 use Exception;
-use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
-use App\Http\Controllers\Controller;
 use Modules\Channel\Http\Requests\CurrencyStoreRequest;
 use Modules\Channel\Http\Requests\CurrencyUpdateRequest;
 use Modules\Channel\Services\CurrencyService;
-use Modules\Core\Http\Controllers\CoreController;
+use Modules\Core\Http\Controllers\BaseController;
 
-class CurrencyController extends CoreController
+class CurrencyController extends BaseController
 {
     public function __construct(protected CurrencyService $currencyService)
     {

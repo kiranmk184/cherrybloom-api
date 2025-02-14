@@ -3,6 +3,7 @@
 namespace Modules\Channel\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rules\File;
 
 class ChannelStoreRequest extends FormRequest
 {
@@ -13,14 +14,15 @@ class ChannelStoreRequest extends FormRequest
     {
         return [
             'code' => ['required', 'string', 'unique:channels,code'],
-            'name' => ['string'],
-            'description' => ['string'],
+            'theme' => ['string'],
             'hostname' => ['string'],
-            'logo' => ['string'],
-            'favicon' => ['string'],
-            'timezone' => ['string'],
-            'default_locale_id' => ['string'],
+            'logo' => ['required', File::types(['pgn', 'jpg'])->max(1024)],
+            'favicon' => [File::types(['pgn', 'jpg'])->max(256)],
+            'timezone' => ['timezone'],
             'is_maintenance_on' => ['bool'],
+            'allowed_ips' => ['string'],
+            'default_locale_id' => ['required', 'integer', 'exists:locales,id'],
+            'base_currency_id' => ['required', 'uuid', 'exists:currencies,id'],
             'root_category_id' => ['required', 'uuid', 'exists:categories,id'],
         ];
     }
