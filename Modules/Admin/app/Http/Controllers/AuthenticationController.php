@@ -8,9 +8,9 @@ use Modules\Admin\Models\Admin;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Hash;
 use Modules\Admin\Http\Requests\LoginRequest;
-use Modules\Core\Http\Controllers\CoreController;
+use Modules\Core\Http\Controllers\BaseController;
 
-class AuthenticationController extends CoreController
+class AuthenticationController extends BaseController
 {
     public function login(LoginRequest $loginRequest): JsonResponse
     {

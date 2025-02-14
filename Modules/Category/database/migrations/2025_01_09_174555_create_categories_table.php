@@ -15,11 +15,11 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->foreignUuid('parent_id')->nullable()->constrained('categories', 'id')->onDelete('cascade');
             $table->integer('position')->default(0);
-            $table->string('name')->nullable();
-            $table->string('slug')->nullable();
+            $table->string('name');
+            $table->string('slug');
             $table->string('display_mode')->nullable();
             $table->text('description')->nullable();
-            $table->string('category_icon')->nullable();
+            $table->string('category_icon');
             $table->boolean('status')->default(0);
             $table->json('additional')->nullable();
             $table->timestamps();
